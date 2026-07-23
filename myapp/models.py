@@ -8,7 +8,9 @@ from .follows.models.follow import *
 from .follows.models.userblock import *
 
 from .hashtag.models.hashtag import *
+from .chat.models.chatRoom import *
 
+from .chat.models.chatMessage import *
 
 
 from .feed.models.userfeed import *
