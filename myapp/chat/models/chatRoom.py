@@ -1,6 +1,8 @@
 from django.db import models
 
-from account.models import UserRegisterdb
+
+
+from myapp.account.models.user import UserRegisterdb
 
 class ChatRoom(models.Model):
 

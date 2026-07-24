@@ -1,5 +1,7 @@
 
 from django.db import models
+from myapp.chat.models.chatRoom import ChatRoom
+from myapp.account.models.user import UserRegisterdb
 class ChatMessage(models.Model):
 
     room = models.ForeignKey(
@@ -9,7 +11,7 @@ class ChatMessage(models.Model):
     )
 
     sender = models.ForeignKey(
-        UserLogin,
+        UserRegisterdb,
         on_delete=models.CASCADE,
         related_name="sent_messages"
     )
