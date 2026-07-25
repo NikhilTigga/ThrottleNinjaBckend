@@ -9,8 +9,6 @@ def jwt_required(view_func):
     def wrapper(request, *args, **kwargs):
 
         user = get_authenticated_user(request)
-        
-       
 
         if not user:
             return JsonResponse({

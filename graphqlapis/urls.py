@@ -1,9 +1,19 @@
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
 from strawberry.django.views import GraphQLView
 from graphqlapis.graphql.schema import schema
-from django.views.decorators.csrf import csrf_exempt
+
+from .context import GraphQLContext
+
+
 urlpatterns = [
     path(
         "graphql/",
-    csrf_exempt(GraphQLView.as_view(schema=schema))),
+        csrf_exempt(
+            GraphQLView.as_view(
+                schema=schema,
+                get_context=lambda request, response: GraphQLContext(request)
+            )
+        ),
+    ),
 ]

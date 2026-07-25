@@ -40,21 +40,7 @@ def generate_refresh_token(user):
     return token
 
 
-# def decode_jwt_token(token):
 
-#     try:
-#         payload = jwt.decode(
-#             token,
-#             settings.JWT_SECRET_KEY,
-#             algorithms=[settings.JWT_ALGORITHM]
-#         )
-#         return payload
-
-#     except jwt.ExpiredSignatureError:
-#         return None
-
-#     except jwt.InvalidTokenError:
-#         return None
 
 def decode_jwt_token(token):
 

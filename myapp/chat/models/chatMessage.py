@@ -1,8 +1,10 @@
 
 from django.db import models
 
+
 from .chatRoom import ChatRoom
 from myapp.models import UserRegisterdb
+
 class ChatMessage(models.Model):
 
     room = models.ForeignKey(

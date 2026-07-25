@@ -39,6 +39,10 @@ from .CheckUserExistsAPI.views import (
     CheckUserExistsAPI
 )
 
+from .chatListAPI.views import (
+    ChatUserListAPI
+)
+
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -84,4 +88,7 @@ urlpatterns = [
     path("searchFriends/",csrf_exempt(SearchFriendsAPI.as_view()), name="searchFriends"),
     
     path("checkUserExistAPI/",csrf_exempt(CheckUserExistsAPI.as_view()), name="checkUserExist"),
+    
+    path("chatListAPI/",csrf_exempt(ChatUserListAPI.as_view()), name="chatlistapi")
+    
 ]

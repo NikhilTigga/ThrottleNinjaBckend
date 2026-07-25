@@ -2,13 +2,17 @@ import strawberry
 
 from myapp.models import Post 
 from .types import PostType , PostMediaType
-
+from strawberry.types import Info
 
 @strawberry.type
 class Query:
 
     @strawberry.field
-    def admin_posts(self) -> list[PostType]:
+    def admin_posts(self, info: Info) -> list[PostType]:
+        user = info.context.request.user
+
+        if not user:
+            raise Exception("Unauthorized")
 
         posts = (
             Post.objects
