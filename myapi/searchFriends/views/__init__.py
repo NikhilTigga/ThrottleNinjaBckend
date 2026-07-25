@@ -1,0 +1,1 @@
+from .searchFriends import SearchFriendsAPI

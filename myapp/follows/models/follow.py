@@ -24,9 +24,7 @@ class Follow(models.Model):
         choices=Status.choices,
         default=Status.ACCEPTED
     )
-
     created_at = models.DateTimeField(auto_now_add=True)
-
     class Meta:
         db_table = "user_follows"
 
@@ -36,7 +34,6 @@ class Follow(models.Model):
                 name="unique_follow_relation"
             )
         ]
-
         indexes = [
             models.Index(fields=["follower"]),
             models.Index(fields=["following"]),

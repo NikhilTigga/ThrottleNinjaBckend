@@ -1,8 +1,15 @@
 from django.db import models
 
-from account.models import UserRegisterdb
+from myapp.models import UserRegisterdb
 
 class ChatRoom(models.Model):
+    
+    room_key = models.CharField(
+        max_length=100,
+        unique=True,
+        null=True,
+        blank=True
+    )
 
     users = models.ManyToManyField(
         UserRegisterdb,

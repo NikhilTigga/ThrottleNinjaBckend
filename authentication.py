@@ -46,10 +46,10 @@ def get_authenticated_user(request):
         return None
 
     token = auth_header.split(" ")[1]
-    print("Token:", token)
+    
 
     payload = decode_jwt_token(token)
-    print("Payload:", payload)
+   
 
     if not payload:
         print("Payload is None")

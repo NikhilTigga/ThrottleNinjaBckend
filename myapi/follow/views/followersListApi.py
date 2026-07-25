@@ -17,6 +17,17 @@ class FollowersListAPI(View):
                 status=Follow.Status.ACCEPTED
             ).select_related("follower")
 
+            # Users followed by current user
+            following_ids = set(
+                Follow.objects.filter(
+                    follower=user,
+                    status=Follow.Status.ACCEPTED
+                ).values_list(
+                    "following_id",
+                    flat=True
+                )
+            )
+
             data = []
 
             for follow in followers:
@@ -30,6 +41,9 @@ class FollowersListAPI(View):
                     "profile_img": follower.profile_img,
                     "is_verified": follower.is_verified,
                     "city": follower.city,
+
+                    # Does current user follow this follower?
+                    "is_following": follower.id in following_ids
                 })
 
             return JsonResponse({

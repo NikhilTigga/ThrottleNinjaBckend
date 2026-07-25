@@ -1,13 +1,10 @@
 
-
-
 from django.views import View
 from django.http import JsonResponse
 from authenticatedecorator import jwt_required
 from django.utils.decorators import method_decorator
 
 from myapp.models import *
-
 
 @method_decorator(jwt_required, name="dispatch")
 class FriendSuggestionsAPI(View):
@@ -21,13 +18,26 @@ class FriendSuggestionsAPI(View):
                     "status": 0,
                     "message": "User not authenticated"
                 })
-
-            # Users already followed by current user
-            following_ids = Follow.objects.filter(
-                follower=current_user,
-                status=Follow.Status.ACCEPTED
-            ).values_list("following_id", flat=True)
-
+            # Users current user follows
+            following_ids = set(
+                Follow.objects.filter(
+                    follower=current_user,
+                    status=Follow.Status.ACCEPTED
+                ).values_list(
+                    "following_id",
+                    flat=True
+                )
+            )
+            # Users who follow current user
+            follower_ids = set(
+                Follow.objects.filter(
+                    following=current_user,
+                    status=Follow.Status.ACCEPTED
+                ).values_list(
+                    "follower_id",
+                    flat=True
+                )
+            )
             suggestions = UserRegisterdb.objects.filter(
                 is_active=True
             ).exclude(
@@ -39,6 +49,7 @@ class FriendSuggestionsAPI(View):
             data = []
 
             for user in suggestions:
+
                 data.append({
                     "user_id": user.id,
                     "full_name": user.full_name,
@@ -48,6 +59,12 @@ class FriendSuggestionsAPI(View):
                     "following_count": user.following_count,
                     "is_verified": user.is_verified,
                     "is_private": user.is_private,
+
+                    # Current user follows them?
+                    "is_following": user.id in following_ids,
+
+                    # They follow current user?
+                    "follows_you": user.id in follower_ids
                 })
 
             return JsonResponse({
@@ -62,5 +79,3 @@ class FriendSuggestionsAPI(View):
                 "status": 0,
                 "message": str(e)
             })
-
-

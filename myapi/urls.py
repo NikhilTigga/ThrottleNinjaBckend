@@ -27,6 +27,17 @@ from .profile.views import(
     UserProfileAPI
 )
 
+from .getCreateChatRoom.views import(
+    getCreateChatRoomAPI
+)
+
+from .searchFriends.views import (
+    SearchFriendsAPI
+)
+
+from .CheckUserExistsAPI.views import (
+    CheckUserExistsAPI
+)
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -65,4 +76,12 @@ urlpatterns = [
     path("friendSuggestionApi/",csrf_exempt(FriendSuggestionsAPI.as_view()),name = "friendSuggestion"),
     
     path("checknicknameavailability/",csrf_exempt(CheckNicknameAvailabilityAPI.as_view()),name="checknickname"),
+    
+    
+    path("getCreateChatRoomAPI/",csrf_exempt(getCreateChatRoomAPI.as_view()),name="getCreateChatRoomAPI"),
+    
+    
+    path("searchFriends/",csrf_exempt(SearchFriendsAPI.as_view()), name="searchFriends"),
+    
+    path("checkUserExistAPI/",csrf_exempt(CheckUserExistsAPI.as_view()), name="checkUserExist"),
 ]

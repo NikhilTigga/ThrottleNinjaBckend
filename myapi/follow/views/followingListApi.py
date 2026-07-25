@@ -5,8 +5,6 @@ from django.utils.decorators import method_decorator
 from myapp.models import *
 from authenticatedecorator import jwt_required
 
-
-
 @method_decorator(jwt_required, name="dispatch")
 class FollowingListAPI(View):
 
@@ -19,6 +17,17 @@ class FollowingListAPI(View):
                 follower=user,
                 status=Follow.Status.ACCEPTED
             ).select_related("following")
+
+            # Users who follow the current user
+            follower_ids = set(
+                Follow.objects.filter(
+                    following=user,
+                    status=Follow.Status.ACCEPTED
+                ).values_list(
+                    "follower_id",
+                    flat=True
+                )
+            )
 
             data = []
 
@@ -33,6 +42,9 @@ class FollowingListAPI(View):
                     "profile_img": following.profile_img,
                     "is_verified": following.is_verified,
                     "city": following.city,
+
+                    # Does this user follow me back?
+                    "is_following_you": following.id in follower_ids
                 })
 
             return JsonResponse({

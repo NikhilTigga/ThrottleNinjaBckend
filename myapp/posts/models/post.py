@@ -5,6 +5,12 @@ from myapp.hashtag.models import Hashtag
 
 
 class Post(models.Model):
+    
+    STATUS_CHOICES = (
+        ("active", "Active"),
+        ("blocked", "Blocked"),
+    )
+     
     creator = models.ForeignKey(
         UserRegisterdb,
         on_delete=models.CASCADE,
@@ -27,6 +33,23 @@ class Post(models.Model):
     like_count = models.PositiveIntegerField(default=0)
 
     comment_count = models.PositiveIntegerField(default=0)
+    
+     # Admin Moderation Fields
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="active"
+    )
+
+    admin_remark = models.TextField(
+        null=True,
+        blank=True
+    )
+
+    moderated_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True
