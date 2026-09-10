@@ -15,6 +15,9 @@ from .chat.models.chatMessage import *
 
 from .feed.models.userfeed import *
 
+from .club.models.clubdb import *
+from .trip.models.tripdb import *
+
 
 
 # Create your models here.

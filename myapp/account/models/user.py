@@ -18,9 +18,35 @@ class UserRegisterdb(models.Model):
     vehichle_no = models.CharField(max_length=200 , null=True , blank=True)
     fcm_token = models.CharField(max_length = 200 , null= True , blank=True)
     
+    
     is_private = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    
+     # ==========================================
+    # CURRENT LOCATION
+    # ==========================================
+
+    current_address = models.TextField(
+        null=True,
+        blank=True
+    )
+
+    current_lat = models.DecimalField(
+        max_digits=10,
+        decimal_places=7,
+        null=True,
+        blank=True
+    )
+
+    current_long = models.DecimalField(
+        max_digits=10,
+        decimal_places=7,
+        null=True,
+        blank=True
+    )
+    
+    
     
     last_seen = models.DateTimeField(
         default=timezone.now,

@@ -42,20 +42,24 @@ from .CheckUserExistsAPI.views import (
 from .chatListAPI.views import (
     ChatUserListAPI
 )
-
+from .club.clubapis import *
 from django.views.decorators.csrf import csrf_exempt
+from .Trip.createTripAPIs import *
 
 urlpatterns = [
+    
     path(
         "userRegister/",
         csrf_exempt(UserRegisterAPI.as_view()),
         name="userregisterapi"
     ),
+    
     path(
         "userLogin/",
         csrf_exempt(LoginAPI.as_view()),
         name="userloginapi"
     ),
+    
     path("updateProfileAPI/",csrf_exempt(UpdateProfileAPI.as_view()),name="updateProfileAPI"),
     
     path("createdpostapi/",csrf_exempt(CreatePostAPI.as_view()), name="createPost"),
@@ -89,6 +93,26 @@ urlpatterns = [
     
     path("checkUserExistAPI/",csrf_exempt(CheckUserExistsAPI.as_view()), name="checkUserExist"),
     
-    path("chatListAPI/",csrf_exempt(ChatUserListAPI.as_view()), name="chatlistapi")
+    path("chatListAPI/",csrf_exempt(ChatUserListAPI.as_view()), name="chatlistapi"),
+    
+    path("createClubAPI/",csrf_exempt(CreateClubAPI.as_view()), name="createClubAPI"),
+    
+    path("joinClubAPI/",csrf_exempt(JoinClubAPI.as_view()),name='joinClubAPI'),
+    
+    path('approveClubJoinRequestAPI/',csrf_exempt(ApproveClubJoinRequestAPI.as_view()),name="approveClubJoinRequestAPI"),
+    
+    path('rejectClubJoinRequestAPI/',csrf_exempt(RejectClubJoinRequestAPI.as_view()),name="rejectClubJoinRequestAPI"),
+    
+    path('createTripAPI/',csrf_exempt(CreateTripAPI.as_view()),name='createTripAPI'),
+    
+    path("userCreatedTripListAPI/",csrf_exempt(UserCreatedTripListAPI.as_view()),name="userCreatedTripListAPI"),
+    
+    path("user-club-list/",UserClubListAPI.as_view(),name="user-club-list"),
+    
+    path("discover-clubs/",DiscoverClubAPI.as_view(),name="discover-clubs"),
+    
+    
+    path("discover-trips/",DiscoverTripAPI.as_view(),name="discover-trips"),
+    
     
 ]
