@@ -129,17 +129,17 @@ WSGI_APPLICATION = 'throttleninjabackend.wsgi.application'
 #     }
 # }
 
-if Mode == "LOCAL":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'ThrottleNinjaDB',       # Your database name
-            'USER': 'postgres',            # Your PostgreSQL username
-            'PASSWORD': 'nikhil',   # Your PostgreSQL password
-            'HOST': 'localhost',           # Usually localhost
-            'PORT': '5432',                # Default PostgreSQL port
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': 'localhost',           # Usually localhost
+        'PORT': '5432',                # Default PostgreSQL port
     }
+}
 
 # else:
 #     DATABASES = {
