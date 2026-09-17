@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'myapp',
     'myapi',
     'graphqlapis',
+    'hotels',
 ]
 
 MIDDLEWARE = [

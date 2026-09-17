@@ -12,7 +12,8 @@ urlpatterns = [
         csrf_exempt(
             GraphQLView.as_view(
                 schema=schema,
-                get_context=lambda request, response: GraphQLContext(request)
+                get_context=lambda request, response: GraphQLContext(request),
+                multipart_uploads_enabled=True,
             )
         ),
     ),

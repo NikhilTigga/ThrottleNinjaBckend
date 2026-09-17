@@ -40,6 +40,39 @@ def generate_refresh_token(user):
     return token
 
 
+def generate_hotel_vendor_jwt_token(vendor):
+    payload = {
+        "vendor_id": vendor.id,
+        "mno": vendor.mobile_no,
+        "type": "hotel_vendor_access",
+        "exp": datetime.utcnow() + timedelta(
+            minutes=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES
+        ),
+        "iat": datetime.utcnow()
+    }
+
+    return jwt.encode(
+        payload,
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM
+    )
+
+
+def generate_hotel_vendor_refresh_token(vendor):
+    payload = {
+        "vendor_id": vendor.id,
+        "type": "hotel_vendor_refresh",
+        "exp": datetime.utcnow() + timedelta(days=2),
+        "iat": datetime.utcnow()
+    }
+
+    return jwt.encode(
+        payload,
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM
+    )
+
+
 
 
 def decode_jwt_token(token):

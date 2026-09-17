@@ -19,5 +19,4 @@ from .club.models.clubdb import *
 from .trip.models.tripdb import *
 
 
-
 # Create your models here.

@@ -107,12 +107,12 @@ urlpatterns = [
     
     path("userCreatedTripListAPI/",csrf_exempt(UserCreatedTripListAPI.as_view()),name="userCreatedTripListAPI"),
     
-    path("user-club-list/",UserClubListAPI.as_view(),name="user-club-list"),
+    path("user-club-list/",csrf_exempt(UserClubListAPI.as_view()),name="user-club-list"),
     
-    path("discover-clubs/",DiscoverClubAPI.as_view(),name="discover-clubs"),
+    path("discover-clubs/",csrf_exempt(DiscoverClubAPI.as_view()),name="discover-clubs"),
     
     
-    path("discover-trips/",DiscoverTripAPI.as_view(),name="discover-trips"),
+    path("discover-trips/",csrf_exempt(DiscoverTripAPI.as_view()),name="discover-trips"),
     
     
 ]
